@@ -5,5 +5,5 @@ Requirements - BeautifulSoup
 
 
 To run: python <script_name>             
-Use this python script to get a csv files of latest movie name and quality in which they are available at 'https://www1.yesmovies.gg/'
+Use this python script to get a csv files of latest movie name and quality in which they are available at 'https://www2.yesmovies.gg/'
 
