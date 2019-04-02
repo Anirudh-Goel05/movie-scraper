@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup as soup
 #File-to write to
 filename = 'movie_list.csv'
 f = open(filename,'w')
-headers = "Movie-name, Quality\n"
+headers = "Movie-name, Quality , Link\n"
 
 f.write(headers)
 	
@@ -36,16 +36,29 @@ for i in range(1,y):
 	page_soup = soup(page_html,'html.parser')
 
 	#Finding all containers from html dom examination
-	containers = page_soup.findAll("div",{'class':"ml-item"})
+	#containers = page_soup.findAll("div",{'class':"ml-item"})
+	anchors = page_soup.findAll("a",{"class":"ml-mask jt"})
 
-	for container in containers:
-		info = container.text.split('\n')
-		info = [x for x in info if x != '']
-		quality = info[0].replace(' ','-')
+		
+	
+	# info = anchors[0].text.split('\n')
+	# print(shipping)
+
+	for anchor in anchors:
+		#print(anchors[0]['href'])
+		temp = anchor.text.split('\n')
+		temp = [x for x in temp if x != '']
+		quality = temp[0]
+		title = temp[1]
+		href = "www2.yesmovies.gg" + anchor['href']
+		
+		quality = quality.replace(' ','-')
 		quality = quality.replace(',','-')
-		title = info[1].replace(' ','-')
+		title = title.replace(' ','-')
 		title = title.replace(',','-')
-		f.write(title + "," + quality + "\n")
+
+		#print("%s,%s,%s"%(href,title,quality))
+		f.write(title + "," + quality + "," + href + "\n")
 
 print('mission accomplished ...')
 f.close()	
